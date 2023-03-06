@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import '@/styles/card.css'
 
 import '@/styles/music.css'
+import '@/styles/menu.css'
 
 import type { AppProps } from 'next/app'
 

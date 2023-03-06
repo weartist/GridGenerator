@@ -1,0 +1,39 @@
+.lis {
+  display: flex !important;
+  flex-direction: row;
+  /* width: 1000px; */
+  height: 400px;
+  width: 1500px;
+  margin-bottom: 20px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.gridList {
+  /* width: 100%; */
+  /* align-items: center; */
+  /* display: flex; */
+  background-color: blue;
+}
+
+
+
+.titles {
+  text-align: center;
+  color: red;
+  width: 100%;
+  background-color: brown;
+  /* height: 1em; */
+  margin: 10px;
+  height: 2em;
+}
+
+.saveBtn {
+  position: absolute;
+  bottom: 120px; /* 调整底部距离 */
+  /* left: 20px; */
+  background-color: red;
+  z-index: 666;
+  align-self: center;
+}
