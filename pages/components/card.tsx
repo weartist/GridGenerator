@@ -7,9 +7,8 @@ import Image from 'next/image';
 import { read } from 'fs';
 // import '@/styles/card.css'
 
-
-
-
+import EditableText from './Title';
+import Config from '../api/config';
 
 
 interface Props {
@@ -40,6 +39,11 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
       clickHandle(row);
   }
 
+  const imgStyle = {
+    "width": Config.cardWidth,
+    "height": Config.cardHeight
+  }
+
   function previewFile() {
     let preview = document.getElementById("cover") as HTMLImageElement;
     const files = document.querySelector('input[type=file]') as HTMLInputElement;
@@ -64,11 +68,12 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
 return (
     <div>
     {/* <Popup isOpen={isPopupOpen} closeHandle={handlePopupClose}  /> */}
-      <div className='card column'>
-        <Image className='pics' id="cover" src={"/cover1.png"} alt="what ever" width={500} height={500} onClick={selectImg}/>
+      <div className='card column' style={imgStyle}>
+        <Image className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight} onClick={selectImg}/>
         <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} />
         <div className='line'></div>
-        <span className='card-title'>{title}</span>
+        <EditableText initialText={title} name='card-title'></EditableText>
+        {/* <span className='card-title'>{title}</span> */}
       </div>
     </div>
 

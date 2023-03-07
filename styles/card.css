@@ -31,13 +31,11 @@
     align-self: stretch;
     flex: 2;
     border: none;
-    background: white;
+    /* width: 100%; */
     width: 100%;
-    color: blue;
-    /* background:transparent; */
-    text-align: center;
+    height: 100%;
+    background:transparent;
     vertical-align:middle;
-    line-height:350px;
     border-radius: 10px 10px 0px 0px;
     object-fit: cover;
   }
@@ -67,3 +65,44 @@
 /* .blocks {
   background-color: red;
 } */
+
+
+.card {
+  /* padding: 1rem 1.2rem; */
+  border-radius: var(--border-radius);
+  background: rgba(var(--card-rgb), 0);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  border-color: black;
+  /* transition: background 200ms, border 200ms; */
+  background-color: white;
+  margin: 6px;
+}
+
+.card span {
+  display: inline-block;
+  transition: transform 200ms;
+}
+
+.card h2 {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.card p {
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 30ch;
+}
+
+.card-title {
+  align-self: center;
+  background-color: white;
+  /* width: 95%; */
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  text-align: center;
+  font-size: 1.2em;
+}
+

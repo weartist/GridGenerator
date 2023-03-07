@@ -8,11 +8,20 @@ import Menu from '../components/Menu'
 
 import DomToImage from 'dom-to-image'
 import html2canvas from 'html2canvas'
-
-
+import EditableText from '../components/Title'
+import NumberDropdown from '../components/SelectCount'
+import Config from '../api/config'
 interface Item {
 	title: string;
 	picURL: string;
+}
+
+interface StyleProps {
+	width: string;
+}
+
+interface ListStyle extends StyleProps {
+	height: string;
 }
 
 function toast(title: string) {
@@ -27,6 +36,9 @@ function Mis() {
 		return {title: title, picURL: defaultImgUrl}
 	})
 
+
+
+	
 	const gridList = React.createRef<HTMLDivElement>();
 
 	function slices(arr: Item[], row: number) {
@@ -37,12 +49,38 @@ function Mis() {
 		return result
 	}
 
-	const rows = 3;
-	const width = rows * 500;
+	const [rows, setRows] = useState(3);
+	const [width, setWidth] = useState(rows * Config.cardWidth);
 
+	// const rows = 3;
+
+	const setItemCountForLines = () => {
+
+	}
+
+	function handleResize() {
+		setWidth(window.innerWidth);
+	  }
+
+	const deleteLast = () => {
+		if (items.length < 1) {
+			return
+		}
+
+		setItems(items.slice(0, items.length - 1));
+	}
+
+	const addCard = () => {
+		const defaultCard: Item = {
+			title: "默认文案",
+			picURL: defaultImgUrl
+		}
+		setItems([...items, defaultCard]);
+	}
 	
   	const saveScreenshot = () => {
 
+		// const gridList = document.getElementById("gridList") as HTMLDivElement;
 		// if (gridList.current) {
 		// 	gridList.current!.style.width = '1500px';
 		// } else {
@@ -63,6 +101,21 @@ function Mis() {
 
 		});
 	}
+
+	// const [pageStyle, setPageStyle] = useState<StyleProps>({
+	// 	width: (rows * Config.cardWidth).toString() + 'px'
+	//   });
+
+	  const pageStyle = {
+		width: (rows * (Config.cardWidth + 15)).toString() + 'px'
+	  };
+
+	  const ListStyle: ListStyle = {
+		width: (rows * Config.cardWidth).toString() + 'px',
+		height: Config.cardHeight.toString() + 'px'
+	  };
+
+	  console.log(rows, pageStyle.width, Config.cardWidth);
 
 	const [current ,setCurrent] = useState(0);
 	const [items, setItems] = useState<Item[]>(replaceTitles)
@@ -89,6 +142,14 @@ function Mis() {
 		setItems(newliast);
 	}
 
+	const onCountSelected = (count: number) => {
+		setRows(count);
+		// setWidth(count * Config.cardWidth);
+		// setPageStyle({
+		// 	width: width + 'px'
+		//   });
+	}
+
 	const handlePopupClose = (urls: string) => {
 		
 	  setIsPopupOpen(false);
@@ -110,7 +171,7 @@ function Mis() {
 	
 
 	const list = slices(items, rows).map((titles, key) => (
-		<div className='lis' key={key}>
+		<div className='lis' key={key} style={ListStyle}>
 		{titles.map((item, index) => (
 		  <Card  title={item.title} imgURL={item.picURL} key={index} clickHandle={handlePopupOpen} row={key * rows + index}></Card>
 		))}
@@ -123,14 +184,23 @@ function Mis() {
 		<div className={styles.main} id={styles.main}>
 		<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage}  />
 			{/* <Canvas id='canvass'> */}
+			<div className='option'>
 		<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
+		<button className='saveBtn' onClick={addCard}>增加一个</button>
+		<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
+
+		<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='saveBtn'/>
+		</div>
+		
+		{/* <button className='saveBtn' onClick={setItemCountForLines}>设置每排数量</button> */}
 
 		{/* <MovableArea id='screen' style='height: 100%; width: 100%; background: yellow;' scaleArea>
 			<MovableView style='height: 100%; width: 100%; background: blue;' disabled scale onScale={scaleHandle} scaleMax={1} scaleMin={0.4}>
 				{/* <ScrollView className='scrollview' scrollX scrollY  bounces={false} enhanced enableFlex> */}
           
-			<div className='gridList' id='gridList' ref={gridList}>
+			<div className='gridList' id='gridList' ref={gridList} style={pageStyle}>
 				{/* <div className='titles'>		<span >音乐生涯个人喜好表</span>		</div> */}
+				<EditableText initialText='音乐生涯个人喜好表' name='titles'/>
 				{list}
 				</div>
 			{/* </MovableView>

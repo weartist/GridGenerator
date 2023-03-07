@@ -2,8 +2,8 @@
   display: flex !important;
   flex-direction: row;
   /* width: 1000px; */
-  height: 400px;
-  width: 1500px;
+  /* height: 500;
+  width: 1500px; */
   margin-bottom: 20px;
   align-self: center;
   align-items: center;
@@ -12,28 +12,47 @@
 
 .gridList {
   /* width: 100%; */
-  /* align-items: center; */
-  /* display: flex; */
-  background-color: blue;
+  align-items: center;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
 }
 
 
 
 .titles {
   text-align: center;
-  color: red;
   width: 100%;
-  background-color: brown;
   /* height: 1em; */
   margin: 10px;
   height: 2em;
+  font-size: 1.5em;
+  /* background-color: red; */
+}
+
+.titles-input {
+  border: none;
+  background-color: transparent;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  /* position: absolute; */
+
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 
 .saveBtn {
-  position: absolute;
-  bottom: 120px; /* 调整底部距离 */
+
   /* left: 20px; */
-  background-color: red;
   z-index: 666;
   align-self: center;
+  height: 50px;
+  width: 150;
+  margin: 19px;
+  background-color: white;
+  padding: 8px;
 }
