@@ -11,6 +11,7 @@ import html2canvas from 'html2canvas'
 import EditableText from '../components/Title'
 import NumberDropdown from '../components/SelectCount'
 import Config from '../api/config'
+import GitHubRepoLink from '../components/Repo'
 interface Item {
 	title: string;
 	picURL: string;
@@ -31,7 +32,7 @@ function toast(title: string) {
 function Mis() {
 
 	const defaultImgUrl = '/cover1.png';
-	let titles = ["最喜欢的", "最惊艳的", "最想安利的","最影响我的","听过最多的","最治愈的","听过最早的","爷青回", "它好小众我好爱","最喜欢的", "最惊艳的", "最想安利的","最影响我的","听过最多的","最治愈的","听过最早的","爷青回", "它好小众我好爱","最喜欢的", "最惊艳的", "最想安利的","最影响我的","听过最多的","最治愈的","听过最早的","爷青回", "它好小众我好爱"];
+	let titles = ["最喜欢的", "最惊艳的", "最想安利的","最影响我的","听过最多的","最治愈的","最伤感的","听过最早的","爷青回", "它好小众我好爱","最喜欢的男歌手", "最喜欢的女歌手", "最喜欢的专辑","最近在听的","感觉被过誉的"];
 	let replaceTitles: Item[] = titles.map((title) => {
 		return {title: title, picURL: defaultImgUrl}
 	})
@@ -185,6 +186,7 @@ function Mis() {
 		<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage}  />
 			{/* <Canvas id='canvass'> */}
 			<div className='option'>
+			<span className='defaultSpan'>点击文字可以进行自定义编辑</span>
 		<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
 		<button className='saveBtn' onClick={addCard}>增加一个</button>
 		<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
@@ -197,12 +199,14 @@ function Mis() {
 		{/* <MovableArea id='screen' style='height: 100%; width: 100%; background: yellow;' scaleArea>
 			<MovableView style='height: 100%; width: 100%; background: blue;' disabled scale onScale={scaleHandle} scaleMax={1} scaleMin={0.4}>
 				{/* <ScrollView className='scrollview' scrollX scrollY  bounces={false} enhanced enableFlex> */}
-          
+          <div className='columnView'>
 			<div className='gridList' id='gridList' ref={gridList} style={pageStyle}>
 				{/* <div className='titles'>		<span >音乐生涯个人喜好表</span>		</div> */}
 				<EditableText initialText='音乐生涯个人喜好表' name='titles'/>
 				{list}
 				</div>
+		<GitHubRepoLink />
+		</div>
 			{/* </MovableView>
 		</MovableArea> */}
 				{/* </Canvas> */}

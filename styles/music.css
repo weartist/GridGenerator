@@ -43,6 +43,7 @@
   position: fixed;
   top: 20px;
   right: 20px;
+  vertical-align: middle;
 }
 
 .saveBtn {
@@ -55,4 +56,24 @@
   margin: 19px;
   background-color: white;
   padding: 8px;
+}
+
+
+.FlexView {
+  display: flex; 
+  justify-content: flex-end;
+}
+
+.content {
+  /* margin-left: auto; */
+}
+
+.columnView {
+  display: flex;
+  flex-direction: column;
+}
+
+.defaultSpan {
+  text-align: center;
+  align-self: center;
 }
