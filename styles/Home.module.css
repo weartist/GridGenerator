@@ -6,6 +6,7 @@
   padding: 6rem;
   min-height: 100vh;
   overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .description {
