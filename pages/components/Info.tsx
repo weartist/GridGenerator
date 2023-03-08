@@ -40,7 +40,9 @@ export default function Info(props: InfoProps): JSX.Element {
 
 	const defaultImgUrl = '/cover1.png';
 
-	let replaceTitles: Item[] = props.cardTitles.map((title) => {
+	const defaultTitles = Array(Config.cardCountForLine).fill('默认文案')
+	const titles = props.cardTitles ? props.cardTitles : defaultTitles
+	let replaceTitles: Item[] = titles.map((title) => {
 		return { title: title, picURL: defaultImgUrl }
 	})
 
@@ -143,7 +145,7 @@ export default function Info(props: InfoProps): JSX.Element {
 	const handleImageSelected = (urls: string) => {
 		setIsPopupOpen(false);
 		console.log("选择的url是" + urls);
-		let newliast = items.map((item, index) => {
+		let newItems = items.map((item, index) => {
 			if (index == current) {
 				return { title: item.title, picURL: urls };
 			} else {
@@ -151,7 +153,7 @@ export default function Info(props: InfoProps): JSX.Element {
 			}
 		})
 
-		setItems(newliast);
+		setItems(newItems);
 	}
 
 	const onCountSelected = (count: number) => {

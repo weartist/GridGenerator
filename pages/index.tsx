@@ -20,7 +20,6 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className="index">
-          {/* <Card></Card> */}
           <button className="main-button" onClick={() => handleClick("Movies")}>观影生涯喜好表</button>
           <button className="main-button" onClick={() => handleClick("Musics")}>音乐生涯喜好表</button>
           <button className="main-button" onClick={() => handleClick("Games")}>游戏生涯喜好表</button>
