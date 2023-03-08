@@ -209,8 +209,8 @@ export default function Info(props: InfoProps): JSX.Element {
 					<EditableText initialText={props.title} name='titles' />
 					{list}
 				</div>
-				<GitHubRepoLink />
 			</div>
+			<GitHubRepoLink />
 			{/* </MovableView>
 		</MovableArea> */}
 			{/* </Canvas> */}
