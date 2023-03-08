@@ -1,0 +1,26 @@
+.main-button {
+    position: relative;
+    display: inline-block;
+    padding: 1.2em 2em;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+
+    content: '';
+    margin: 5px;
+    /* position: absolute; */
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    border-radius: 4px;
+    transition: box-shadow .5s ease, transform .2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    transform:
+        translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+
+}
+
+.index {
+    display: flex;
+}

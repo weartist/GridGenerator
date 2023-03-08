@@ -3,6 +3,7 @@ import '@/styles/card.css'
 
 import '@/styles/music.css'
 import '@/styles/menu.css'
+import '@/styles/main.css'
 
 import type { AppProps } from 'next/app'
 
