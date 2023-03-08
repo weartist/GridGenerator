@@ -23,20 +23,20 @@ interface Props {
 
 // const Popup: React.FC<{ isOpen: boolean, closeHandle: (string) => void }> = ({ isOpen, closeHandle}) => {
 
-const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: number) => void, row: number }> = ({title, imgURL, clickHandle, row}) => {
+const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: number) => void, row: number }> = ({ title, imgURL, clickHandle, row }) => {
 
   // const [isPopupOpen, setIsPopupOpen] = useState(false);
-	const handlePopupOpen = () => {
-	  // setIsPopupOpen(true);
+  const handlePopupOpen = () => {
+    // setIsPopupOpen(true);
     console.log("hanssss");
-	};
+  };
 
-  const [ imgData,setImgData ] = useState('/cover1.png');
+  const [imgData, setImgData] = useState('/cover1.png');
 
   const selectImg = () => {
-      // let upimgs = document.getElementById("upimg")!
-      // upimgs.click();
-      clickHandle(row);
+    // let upimgs = document.getElementById("upimg")!
+    // upimgs.click();
+    clickHandle(row);
   }
 
   const imgStyle = {
@@ -49,11 +49,11 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
     const files = document.querySelector('input[type=file]') as HTMLInputElement;
     const file = files.files![0];
     const reader = new FileReader();
-  
+
     reader.onloadend = function () {
       setImgData(reader.result!.toString());
     }
-  
+
     if (file) {
       reader.readAsDataURL(file);
     } else {
@@ -63,20 +63,17 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
 
   const upChange = () => {
     previewFile();
-}
+  }
 
-return (
+  return (
     <div>
-    {/* <Popup isOpen={isPopupOpen} closeHandle={handlePopupClose}  /> */}
       <div className='card column' style={imgStyle}>
-        <Image className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight} onClick={selectImg}/>
+        <Image className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} onClick={selectImg} />
         <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} />
         <div className='line'></div>
         <EditableText initialText={title} name='card-title'></EditableText>
-        {/* <span className='card-title'>{title}</span> */}
       </div>
     </div>
-
   );
 };
 

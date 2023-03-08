@@ -13,7 +13,9 @@ import EditableText from './Title'
 import NumberDropdown from './SelectCount'
 import Config from '../api/config'
 import GitHubRepoLink from './Repo'
-
+import Router, { useRouter } from "next/router";
+import Gallery from '../details/Gallery'
+import Image from 'next/image'
 
 interface InfoProps {
 	title: string;
@@ -88,6 +90,10 @@ export default function Info(props: InfoProps): JSX.Element {
 		setItems([...items, defaultCard]);
 	}
 
+	const reEdit = () => {
+		setGalleryURL('');
+	}
+
 	const saveScreenshot = () => {
 
 		// const gridList = document.getElementById("gridList") as HTMLDivElement;
@@ -111,10 +117,40 @@ export default function Info(props: InfoProps): JSX.Element {
 		html2canvas(clone, { height: node.scrollHeight, width:node.offsetWidth , x: 0 }).then(function (canvas) {
 			var link = document.createElement('a');
 			let dataUrl = canvas.toDataURL();
-			link.download = 'my-image-name.jpeg';
-			link.href = dataUrl;
-			link.click();
+			// link.download = 'my-image-name.jpeg';
+			// link.href = dataUrl;
+			// link.click();
 			document.body.removeChild(clone);
+			let path = "/details/Gallery";
+
+			path += '?imgURL=';
+			path += dataUrl;
+
+
+			setGalleryURL(dataUrl);
+			// path += '&width=';
+			// path += (rows * Config.cardWidth).toString();
+
+			// path += '&height=';
+			// path += (rows * Config.cardHeight).toString();
+
+
+			// let newItems = items.map((item, index) => {
+			// 	if (index == 1) {
+			// 		return { title: item.title, picURL: dataUrl };
+			// 	} else {
+			// 		return item;
+			// 	}
+			// })
+	
+			// setItems(newItems);
+
+			// Router.push({
+			// 	pathname: path
+			// });
+
+
+			// Router.push("/details/" + 'Musics');
 
 		});
 	}
@@ -134,6 +170,8 @@ export default function Info(props: InfoProps): JSX.Element {
 	const [current, setCurrent] = useState(0);
 	const [items, setItems] = useState<Item[]>(replaceTitles)
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	// const [IsImgVisible, setIsImgVisible] = useState(false);
+	const [galleryURL, setGalleryURL] = useState('');
 
 	const handlePopupOpen = (index: number) => {
 		console.log(index);
@@ -192,20 +230,31 @@ export default function Info(props: InfoProps): JSX.Element {
 		</div>
 	))
 
+	const prompt = galleryURL.length == 0 ? '点击标题或者卡片文字可以进行自定义编辑' : '长按图片保存';
+
 
 	return (
 
 		<div className={styles.main} id={styles.main}>
+				<div className={`imgGallery${galleryURL.length > 1 ? "-active" : ""}`}>
+				{/* <Gallery imageURL={galleryURL}></Gallery> */}
+				{/* <Image className='pics' id="cover" src={galleryURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} /> */}
+
+
+            	{/* <span>{'and' + '1' + galleryURL}</span> */}
+            	<Image className='gallery-pic' id="cover" src={galleryURL} alt="what ever" width={500} height={500}/>
+				</div>
 			<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage} />
 			<div className='option'>
-				<span className='defaultSpan'>点击标题或者卡片文字可以进行自定义编辑</span>
+				<span className='defaultSpan'>{prompt}</span>
+				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
 				<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
 				<button className='saveBtn' onClick={addCard}>增加一个</button>
 				<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
 
 				<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='saveBtn' />
 			</div>
-			<div className='columnView' id='columnView'>
+			<div className={`columnView${galleryURL.length == 0 ? "-active" : ""}`} id='columnView'>
 				<div className='gridList' id='gridList' ref={gridList} style={pageStyle}>
 					{/* <div className='titles'>		<span >音乐生涯个人喜好表</span>		</div> */}
 					<EditableText initialText={props.title} name='titles' />
@@ -220,3 +269,16 @@ export default function Info(props: InfoProps): JSX.Element {
 	)
 }
 
+
+// const Gallery: React.FC<{ imageURL: string }> = ({ imageURL}) => {
+
+   
+
+//     return (
+//       <div className={`imgGallery${imageURL.length > 1 ? "-active" : ""}`}>
+// 		<Image className='pics' id="cover" src={imageURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} />
+//     </div>
+
+//     )
+
+// }

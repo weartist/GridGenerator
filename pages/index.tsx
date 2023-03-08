@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Router from "next/router";
+import { ReactDOM } from "react";
 
 type targetType = "Musics" | "Movies" | "Books" | "Games";
 
