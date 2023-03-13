@@ -42,6 +42,10 @@
   align-items: center;
 }
 
+.option-mobile {
+  bottom: 20px;
+}
+
 .saveBtn-hide {
   display: none;
 }

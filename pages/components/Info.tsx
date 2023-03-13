@@ -1,5 +1,5 @@
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import React, { Component } from 'react'
 
 import Card from './card'
@@ -47,11 +47,18 @@ export default function Info(props: InfoProps): JSX.Element {
 	let replaceTitles: Item[] = titles.map((title) => {
 		return { title: title, picURL: defaultImgUrl }
 	})
-
-
-
-
+	
+	
+	
 	const gridList = React.createRef<HTMLDivElement>();
+	
+		useEffect(() => {
+			const optionDiv = document.getElementById("option") as HTMLDivElement;
+			if (optionDiv && gridList) {
+				console.log('offset height is ' + optionDiv.offsetHeight);
+				gridList.current!.style.padding = (optionDiv.offsetHeight * 3).toString();
+			}
+		});
 
 	function slices(arr: Item[], row: number) {
 		var result: Item[][] = [];
@@ -230,22 +237,17 @@ export default function Info(props: InfoProps): JSX.Element {
 		</div>
 	))
 
-	const prompt = galleryURL.length == 0 ? '点击标题或者卡片文字可以进行自定义编辑' : '长按图片保存';
+	const prompt = galleryURL.length == 0 ? '点击标题，卡片文字可进行编辑' : '长按图片保存';
 
 
 	return (
 
 		<div className={styles.main} id={styles.main}>
 				<div className={`imgGallery${galleryURL.length > 1 ? "-active" : ""}`}>
-				{/* <Gallery imageURL={galleryURL}></Gallery> */}
-				{/* <Image className='pics' id="cover" src={galleryURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} /> */}
-
-
-            	{/* <span>{'and' + '1' + galleryURL}</span> */}
             	<Image className='gallery-pic' id="cover" src={galleryURL} alt="what ever" width={500} height={500}/>
 				</div>
 			<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage} />
-			<div className='option'>
+			<div className='option' id='option'>
 				<span className='saveBtn'>{prompt}</span>
 				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
 				<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
@@ -269,16 +271,3 @@ export default function Info(props: InfoProps): JSX.Element {
 	)
 }
 
-
-// const Gallery: React.FC<{ imageURL: string }> = ({ imageURL}) => {
-
-   
-
-//     return (
-//       <div className={`imgGallery${imageURL.length > 1 ? "-active" : ""}`}>
-// 		<Image className='pics' id="cover" src={imageURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} />
-//     </div>
-
-//     )
-
-// }
