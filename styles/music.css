@@ -39,6 +39,7 @@
   right: 20px;
   vertical-align: middle;
   overflow-x: auto;
+  align-items: center;
 }
 
 .saveBtn-hide {

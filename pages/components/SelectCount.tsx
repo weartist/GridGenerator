@@ -16,9 +16,9 @@ const NumberDropdown: React.FC<Props> = ({ onSelect, initialCount, name }) => {
   };
 
   return (
-    <select className={name} title={defaultTitle} value={selectedNumber} onChange={handleSelect}>
+    <select className={name} title={defaultTitle} value={defaultTitle} onChange={handleSelect}>
       <option value={selectedNumber}>{defaultTitle}</option>
-      {[1, 2, 3, 4, 5, 6, 7, 8].map((number) => (
+      {[2, 3, 4, 5, 6, 7, 8].map((number) => (
         <option key={number} value={number}>
           {number}
         </option>

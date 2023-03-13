@@ -7,7 +7,7 @@
     cursor: pointer;
     user-select: none;
     color: white;
-
+    /* height: 5em; */
     content: '';
     margin: 5px;
     /* position: absolute; */
@@ -24,7 +24,7 @@
 .index {
     display: flex;
     background-color: green;
-    height: 10000px;
+    /* height: 10000px; */
 }
 
 .gallery {

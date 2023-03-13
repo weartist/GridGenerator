@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import Router from "next/router";
 import { ReactDOM } from "react";
 
-type targetType = "Musics" | "Movies" | "Books" | "Games";
+type targetType = "Musics" | "Movies" | "Books" | "Games" | "Default";
 
 export default function Home() {
 
@@ -25,6 +25,7 @@ export default function Home() {
           <button className="main-button" onClick={() => handleClick("Musics")}>音乐生涯喜好表</button>
           <button className="main-button" onClick={() => handleClick("Games")}>游戏生涯喜好表</button>
           <button className="main-button" onClick={() => handleClick("Books")}>阅读生涯喜好表</button>
+		  <button className="main-button" onClick={() => handleClick("Default")}>编辑默认喜好表</button>
         </div>
       </main>
     </>
