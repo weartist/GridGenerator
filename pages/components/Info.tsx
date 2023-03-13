@@ -246,7 +246,7 @@ export default function Info(props: InfoProps): JSX.Element {
 				</div>
 			<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage} />
 			<div className='option'>
-				<span className='defaultSpan'>{prompt}</span>
+				<span className='saveBtn'>{prompt}</span>
 				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
 				<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
 				<button className='saveBtn' onClick={addCard}>增加一个</button>
