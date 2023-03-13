@@ -17,6 +17,8 @@ import Router, { useRouter } from "next/router";
 import Gallery from '../details/Gallery'
 import Image from 'next/image'
 
+import { isMobile } from 'react-device-detect';
+
 interface InfoProps {
 	title: string;
 	cardTitles: string[];
@@ -38,9 +40,29 @@ function toast(title: string) {
 	console.log(title);
 }
 
+function updateLastSeen(): string {
+    const lastSeen = window.localStorage.getItem('last-seen') ?? new Date().toString();
+    window.localStorage.setItem('last-seen', new Date().toString());
+    return lastSeen;
+}
+
+function useLastSeen() {
+    const [lastSeen, setLastSeen] = useState<string>('');
+    const retrieved = useRef(false); //To get around strict mode running the hook twice
+    useEffect(() => {
+        if (retrieved.current) return;
+        retrieved.current = true;
+        setLastSeen(updateLastSeen());
+    }, []);
+
+    return lastSeen;
+}
+
+
 export default function Info(props: InfoProps): JSX.Element {
 
 	const defaultImgUrl = '/cover1.png';
+    const lastSeen = useLastSeen();
 
 	const defaultTitles = Array(Config.cardCountForLine).fill('默认文案')
 	const titles = props.cardTitles ? props.cardTitles : defaultTitles
@@ -228,6 +250,7 @@ export default function Info(props: InfoProps): JSX.Element {
 		setIsPopupOpen(false);
 	}
 
+	const className = 'option option' + (isMobile == true ? "-mobile" : "-web");
 
 	const list = slices(items, rows).map((titles, key) => (
 		<div className='lis' key={key} style={ListStyle}>
@@ -240,6 +263,7 @@ export default function Info(props: InfoProps): JSX.Element {
 	const prompt = galleryURL.length == 0 ? '点击标题，卡片文字可进行编辑' : '长按图片保存';
 
 
+
 	return (
 
 		<div className={styles.main} id={styles.main}>
@@ -247,7 +271,7 @@ export default function Info(props: InfoProps): JSX.Element {
             	<Image className='gallery-pic' id="cover" src={galleryURL} alt="what ever" width={500} height={500}/>
 				</div>
 			<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage} />
-			<div className='option' id='option'>
+			<div className={className} id='option'>
 				<span className='saveBtn'>{prompt}</span>
 				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
 				<button className='saveBtn' onClick={saveScreenshot}>生成预览</button>

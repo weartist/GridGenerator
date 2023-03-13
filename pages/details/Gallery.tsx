@@ -26,17 +26,6 @@ interface WithRouterProps {
   }
 
   function Gallery(props: ImgProps): JSX.Element {
-
-// const Gallery = () => {
-    // const router = useRouter();
-    // const { props }: galleryProps = router.query;
-    // const router = useRouter();
-    // const { imgURL, width, height } = router.query as { imgURL: string; width: string, height: string };
-
-    // const width = parseInt(router.query.width!) as number;
-    // const height = parseInt(router.query.height!) as number;
-    // const width = 500;
-    // const height = 599;
     const imgCount = props.imageURL && props.imageURL.length > 1 ? props.imageURL.length : 0;
     return (
         <div className={`imgGallery${imgCount > 1 ? "-active" : ""}`}>
