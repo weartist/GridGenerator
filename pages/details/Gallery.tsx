@@ -37,8 +37,9 @@ interface WithRouterProps {
     // const height = parseInt(router.query.height!) as number;
     // const width = 500;
     // const height = 599;
+    const imgCount = props.imageURL && props.imageURL.length > 1 ? props.imageURL.length : 0;
     return (
-        <div className={`imgGallery${props.imageURL.length > 1 ? "-active" : ""}`}>
+        <div className={`imgGallery${imgCount > 1 ? "-active" : ""}`}>
             <span>{'and' + '1' + props.imageURL}</span>
             <Image className='pics' id="cover" src={props.imageURL} alt="what ever" width={500} height={500}/>
         </div>
