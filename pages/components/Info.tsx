@@ -250,7 +250,7 @@ export default function Info(props: InfoProps): JSX.Element {
 			<div className='option' id='option'>
 				<span className='saveBtn'>{prompt}</span>
 				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
-				<button className='saveBtn' onClick={saveScreenshot}>保存到本地</button>
+				<button className='saveBtn' onClick={saveScreenshot}>生成预览</button>
 				<button className='saveBtn' onClick={addCard}>增加一个</button>
 				<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
 
