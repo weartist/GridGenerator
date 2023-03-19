@@ -8,7 +8,7 @@ import Menu from './Menu'
 // import '@/styles/music.css'
 
 import DomToImage from 'dom-to-image'
-import html2canvas from 'html2canvas'
+// import html2canvas from 'html2canvas'
 import EditableText from './Title'
 import NumberDropdown from './SelectCount'
 import Config from '../api/config'
@@ -16,6 +16,7 @@ import GitHubRepoLink from './Repo'
 import Router, { useRouter } from "next/router";
 import Gallery from '../details/Gallery'
 import Image from 'next/image'
+import html2canvas from './local/html2canvas'
 
 import { isMobile } from 'react-device-detect';
 
