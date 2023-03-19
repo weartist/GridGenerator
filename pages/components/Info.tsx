@@ -144,7 +144,7 @@ export default function Info(props: InfoProps): JSX.Element {
 
 
 
-		html2canvas(clone, { height: node.scrollHeight, width:node.offsetWidth , x: 0 }).then(function (canvas) {
+		html2canvas(clone, { height: node.scrollHeight, width:node.offsetWidth , x: 0 }).then(function () {
 			var link = document.createElement('a');
 			let dataUrl = canvas.toDataURL();
 			// link.download = 'my-image-name.jpeg';
