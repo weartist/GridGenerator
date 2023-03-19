@@ -150,7 +150,7 @@ export default function Info(props: InfoProps): JSX.Element {
 			// link.download = 'my-image-name.jpeg';
 			// link.href = dataUrl;
 			// link.click();
-			document.body.removeChild(clone);
+			// document.body.removeChild(clone);
 			let path = "/details/Gallery";
 
 			path += '?imgURL=';
@@ -158,29 +158,6 @@ export default function Info(props: InfoProps): JSX.Element {
 
 
 			setGalleryURL(dataUrl);
-			// path += '&width=';
-			// path += (rows * Config.cardWidth).toString();
-
-			// path += '&height=';
-			// path += (rows * Config.cardHeight).toString();
-
-
-			// let newItems = items.map((item, index) => {
-			// 	if (index == 1) {
-			// 		return { title: item.title, picURL: dataUrl };
-			// 	} else {
-			// 		return item;
-			// 	}
-			// })
-	
-			// setItems(newItems);
-
-			// Router.push({
-			// 	pathname: path
-			// });
-
-
-			// Router.push("/details/" + 'Musics');
 
 		});
 	}
