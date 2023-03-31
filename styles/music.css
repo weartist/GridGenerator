@@ -39,6 +39,7 @@
   vertical-align: middle;
   overflow-x: auto;
   align-items: center;
+  z-index: 500;
 }
 
 .option-web {
