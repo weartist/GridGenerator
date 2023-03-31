@@ -31,6 +31,7 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
     console.log("hanssss");
   };
 
+  // src="/thirteen.svg"
   const [imgData, setImgData] = useState('/cover1.png');
 
   const selectImg = () => {
@@ -64,11 +65,14 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
   const upChange = () => {
     previewFile();
   }
+  
 
   return (
     <div>
       <div className='card column' style={imgStyle}>
-        <Image className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} onClick={selectImg} />
+        {imgURL.length > 0 &&
+          <Image priority className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} onClick={selectImg} />
+        }
         <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} />
         <div className='line'></div>
         <EditableText initialText={title} name='card-title'></EditableText>
