@@ -52,11 +52,11 @@
   top: auto;
 }
 
-.saveBtn-hide {
+.customBtn-hide {
   display: none;
 }
 
-.saveBtn {
+.customBtn {
   position: relative;
   display: inline-block;
   padding: 1.2em 2em;
@@ -73,6 +73,19 @@
   border-radius: 4px;
   transition: box-shadow .5s ease, transform .2s ease;
   will-change: transform;
+}
+
+.customSpan {
+  position: relative;
+  display: inline-block;
+  padding: 1.2em 2em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  color: white;
+  margin: 5px;
 }
 
 

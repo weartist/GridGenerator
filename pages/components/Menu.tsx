@@ -31,8 +31,6 @@ const Menu: React.FC<{ isOpen: boolean, closeHandle: (handle: string) => void, u
     
       if (file) {
         reader.readAsDataURL(file);
-      } else {
-        preview.src = "";
       }
     }
   
@@ -65,7 +63,7 @@ const Menu: React.FC<{ isOpen: boolean, closeHandle: (handle: string) => void, u
           <button className="margin-items subView" onClick={() => closeHandle("")}>
             关闭
           </button>
-          <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} />
+          <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png, image/jpeg, image/jpg' onChange={upChange} />
 
             </div>
         </div>

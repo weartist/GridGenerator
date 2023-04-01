@@ -1,48 +1,19 @@
 import React from 'react'
 import { useState } from 'react';
-
-// import Popup from './Popup';
-
 import Image from 'next/image';
-import { read } from 'fs';
-// import '@/styles/card.css'
-
 import EditableText from './Title';
-import Config from '../api/config';
 
+const Card: React.FC<{ title: string, imgURL: string, row: number, cardHeight: number, cardWidth: number, clickHandle: (args0: number) => void }> = ({ title, imgURL, row, cardHeight, cardWidth, clickHandle }) => {
 
-interface Props {
-  title: string;
-  clickHand: (index: number) => void;
-  row: number;
-  cow: number;
-}
-
-
-
-
-// const Popup: React.FC<{ isOpen: boolean, closeHandle: (string) => void }> = ({ isOpen, closeHandle}) => {
-
-const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: number) => void, row: number }> = ({ title, imgURL, clickHandle, row }) => {
-
-  // const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const handlePopupOpen = () => {
-    // setIsPopupOpen(true);
-    console.log("hanssss");
-  };
-
-  // src="/thirteen.svg"
   const [imgData, setImgData] = useState('/cover1.png');
 
   const selectImg = () => {
-    // let upimgs = document.getElementById("upimg")!
-    // upimgs.click();
     clickHandle(row);
   }
 
   const imgStyle = {
-    "width": Config.cardWidth,
-    "height": Config.cardHeight
+    "width": cardWidth,
+    "height": cardHeight + 30
   }
 
   function previewFile() {
@@ -68,16 +39,14 @@ const Card: React.FC<{ title: string, imgURL: string, clickHandle: (args0: numbe
   
 
   return (
-    <div>
       <div className='card column' style={imgStyle}>
         {imgURL.length > 0 &&
-          <Image priority className='pics' id="cover" src={imgURL} alt="what ever" width={Config.cardWidth} height={Config.cardHeight - 100} onClick={selectImg} />
+          <Image priority className='cardCover' src={imgURL} alt="what ever" width={cardWidth} height={cardHeight} onClick={selectImg} />
         }
-        <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} />
+        {/* <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} /> */}
         <div className='line'></div>
         <EditableText initialText={title} name='card-title'></EditableText>
       </div>
-    </div>
   );
 };
 

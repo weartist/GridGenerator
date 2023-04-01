@@ -11,6 +11,7 @@ import ImagePreview from './ImagePreview'
 import DomToImage from 'dom-to-image'
 import EditableText from './Title'
 import NumberDropdown from './SelectCount'
+import { CardRadioSelect, CardRadio } from './SelectRadio';
 import Config from '../api/config'
 import GitHubRepoLink from './Repo'
 import Router, { useRouter } from "next/router";
@@ -92,11 +93,23 @@ export default function Info(props: InfoProps): JSX.Element {
 		return result
 	}
 
-	const [rows, setRows] = useState(Config.cardCountForLine);
-	const [width, setWidth] = useState(rows * Config.cardWidth);
-	const [height, setHeight] = useState(100)
+	function cardWidth(): number {
+		return 270;
+	}
 
-	// const rows = 3;
+	function cardHeight(): number {
+		if (cardRadio == '16:9') {
+			return 480;
+		}
+		return 270;
+		
+	}
+
+	const [cardRadio, setCardRadio] = useState<CardRadio>('16:9');
+
+	const [rows, setRows] = useState(Config.cardCountForLine);
+	const [width, setWidth] = useState(rows * cardWidth());
+	const [height, setHeight] = useState(100)
 
 	const setItemCountForLines = () => {
 
@@ -156,15 +169,15 @@ export default function Info(props: InfoProps): JSX.Element {
 
 
 	const pageStyle = {
-		width: (rows * (Config.cardWidth + 15)).toString() + 'px'
+		width: (rows * (cardWidth() + 15)).toString() + 'px'
 	};
 
 	const ListStyle: ListStyle = {
-		width: (rows * Config.cardWidth).toString() + 'px',
-		height: Config.cardHeight.toString() + 'px'
+		width: (rows * cardWidth()).toString() + 'px',
+		height: (cardHeight() + 30).toString() + 'px'
 	};
 
-	console.log(rows, pageStyle.width, Config.cardWidth);
+	console.log(rows, pageStyle.width, cardWidth());
 
 	const [current, setCurrent] = useState(0);
 	const [items, setItems] = useState<Item[]>(replaceTitles)
@@ -197,12 +210,12 @@ export default function Info(props: InfoProps): JSX.Element {
 		setItems(newItems);
 	}
 
+	const onRadioSelected = (radio: CardRadio) => {
+		setCardRadio(radio)
+	}
+
 	const onCountSelected = (count: number) => {
 		setRows(count);
-		// setWidth(count * Config.cardWidth);
-		// setPageStyle({
-		// 	width: width + 'px'
-		//   });
 	}
 
 	const handlePopupClose = (urls: string) => {
@@ -229,12 +242,12 @@ export default function Info(props: InfoProps): JSX.Element {
 	const list = slices(items, rows).map((titles, key) => (
 		<div className='lis' key={key} style={ListStyle}>
 			{titles.map((item, index) => (
-				<Card title={item.title} imgURL={item.picURL} key={index} clickHandle={handlePopupOpen} row={key * rows + index}></Card>
+				<Card title={item.title} imgURL={item.picURL} key={index} clickHandle={handlePopupOpen} row={key * rows + index} cardWidth={cardWidth()} cardHeight={cardHeight()}></Card>
 			))}
 		</div>
 	))
 
-	const prompt = galleryURL.length == 0 ? '点击标题，卡片文字可进行编辑' : '长按图片保存';
+	const prompt = galleryURL.length == 0 ? '点击标题，卡片上的文字可进行编辑' : '长按图片保存';
 
 	var scale = 1
 	if (typeof window !== 'undefined') {
@@ -251,13 +264,14 @@ export default function Info(props: InfoProps): JSX.Element {
 			{
 				galleryURL.length == 0 &&
 				<div className={className} id='option'>
-					<span className='saveBtn'>{prompt}</span>
-					<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
-					<button className='saveBtn' id='imaaa' onClick={generateImagePreview}>生成预览</button>
-					<button className='saveBtn' onClick={addCard}>增加一个</button>
-					<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
-
-					<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='saveBtn' />
+					<span className='customSpan'>{prompt}</span>
+					<button className={`customBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
+					<button className='customBtn' onClick={generateImagePreview}>生成预览</button>
+					<button className='customBtn' onClick={addCard}>增加一个</button>
+					<button className='customBtn' onClick={deleteLast}>删除最后一个</button>
+					<button className='customBtn' onClick={deleteLast}>删除最后一个</button>
+					<CardRadioSelect onSelect={onRadioSelected} initialRadio={cardRadio} name='customBtn'></CardRadioSelect>
+					<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='customBtn' />
 				</div>
 			}
 			<div className={`columnView${galleryURL.length == 0 ? "-active" : ""}`} id='columnView' ref={ref}>
