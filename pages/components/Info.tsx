@@ -7,7 +7,6 @@ import Card from './card'
 import styles from '@/styles/Home.module.css'
 import Menu from './Menu'
 import ImagePreview from './ImagePreview'
-// import '@/styles/music.css'
 
 import DomToImage from 'dom-to-image'
 import EditableText from './Title'
@@ -43,28 +42,28 @@ function toast(title: string) {
 }
 
 function updateLastSeen(): string {
-    const lastSeen = window.localStorage.getItem('last-seen') ?? new Date().toString();
-    window.localStorage.setItem('last-seen', new Date().toString());
-    return lastSeen;
+	const lastSeen = window.localStorage.getItem('last-seen') ?? new Date().toString();
+	window.localStorage.setItem('last-seen', new Date().toString());
+	return lastSeen;
 }
 
 function useLastSeen() {
-    const [lastSeen, setLastSeen] = useState<string>('');
-    const retrieved = useRef(false); //To get around strict mode running the hook twice
-    useEffect(() => {
-        if (retrieved.current) return;
-        retrieved.current = true;
-        setLastSeen(updateLastSeen());
-    }, []);
+	const [lastSeen, setLastSeen] = useState<string>('');
+	const retrieved = useRef(false); //To get around strict mode running the hook twice
+	useEffect(() => {
+		if (retrieved.current) return;
+		retrieved.current = true;
+		setLastSeen(updateLastSeen());
+	}, []);
 
-    return lastSeen;
+	return lastSeen;
 }
 
 
 export default function Info(props: InfoProps): JSX.Element {
 
 	const defaultImgUrl = '/cover1.png';
-    const lastSeen = useLastSeen();
+	const lastSeen = useLastSeen();
 	const ref = useRef<HTMLDivElement>(null)
 
 	const defaultTitles = Array(Config.cardCountForLine).fill('默认文案')
@@ -72,18 +71,18 @@ export default function Info(props: InfoProps): JSX.Element {
 	let replaceTitles: Item[] = titles.map((title) => {
 		return { title: title, picURL: defaultImgUrl }
 	})
-	
-	
-	
+
+
+
 	const gridList = React.createRef<HTMLDivElement>();
-	
-		useEffect(() => {
-			const optionDiv = document.getElementById("option") as HTMLDivElement;
-			if (optionDiv && gridList) {
-				console.log('offset height is ' + optionDiv.offsetHeight);
-				gridList.current!.style.padding = (optionDiv.offsetHeight * 3).toString();
-			}
-		});
+
+	useEffect(() => {
+		const optionDiv = document.getElementById("option") as HTMLDivElement;
+		if (optionDiv && gridList) {
+			console.log('offset height is ' + optionDiv.offsetHeight);
+			gridList.current!.style.padding = (optionDiv.offsetHeight * 3).toString();
+		}
+	});
 
 	function slices(arr: Item[], row: number) {
 		var result: Item[][] = [];
@@ -139,20 +138,20 @@ export default function Info(props: InfoProps): JSX.Element {
 
 	const generateImagePreview = useCallback(() => {
 		if (ref.current === null || isPreview()) {
-		  return
+			return
 		}
-	
+
 		toPng(ref.current, { cacheBust: true, })
-		  .then((dataUrl) => {
-			var node = document.getElementById('columnView')!;
-			setWidth(node.offsetWidth)
-			setHeight(node.scrollHeight)
-			setGalleryURL(dataUrl)
-		  })
-		  .catch((err) => {
-			console.log(err)
-		  })
-	  }, [ref])
+			.then((dataUrl) => {
+				var node = document.getElementById('columnView')!;
+				setWidth(node.offsetWidth)
+				setHeight(node.scrollHeight)
+				setGalleryURL(dataUrl)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}, [ref])
 
 
 
@@ -171,12 +170,10 @@ export default function Info(props: InfoProps): JSX.Element {
 	const [items, setItems] = useState<Item[]>(replaceTitles)
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-	const [IsImgVisible, setIsImgVisible] = useState(false);
 	const [galleryURL, setGalleryURL] = useState('');
 
-
 	const handlePreviewClose = () => {
-		setIsImgVisible(false)
+		setGalleryURL("")
 	};
 
 	const handlePopupOpen = (index: number) => {
@@ -239,25 +236,30 @@ export default function Info(props: InfoProps): JSX.Element {
 
 	const prompt = galleryURL.length == 0 ? '点击标题，卡片文字可进行编辑' : '长按图片保存';
 
-
+	var scale = 1
+	if (typeof window !== 'undefined') {
+		const previewWidthScale = window.screen.width / width;
+		const previewHeightScale = window.screen.height / height;
+		scale = previewWidthScale < previewHeightScale ? previewWidthScale : previewHeightScale;
+	}
 
 	return (
 
 		<div className={styles.main} id={styles.main}>
-				{/* <div className={`imgGallery${galleryURL.length > 1 ? "-active" : ""}`}>
-            	<Image className='gallery-pic' id="cover" src={galleryURL} alt="what ever" width={500} height={500}/>
-				</div> */}
-			<ImagePreview isOpen={galleryURL.length > 0} imageSrc={galleryURL} height={height} width={width} closeHandle={handlePreviewClose}/>
+			<ImagePreview isOpen={galleryURL.length > 0} imageSrc={galleryURL} height={height * scale * 0.8} width={width * scale * 0.8} closeHandle={handlePreviewClose} />
 			<Menu isOpen={isPopupOpen} closeHandle={handlePopupClose} updateHandle={handleImageSelected} cleanHandle={handleCleanImage} />
-			<div className={className} id='option'>
-				<span className='saveBtn'>{prompt}</span>
-				<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
-				<button className='saveBtn' id='imaaa' onClick={generateImagePreview}>生成预览</button>
-				<button className='saveBtn' onClick={addCard}>增加一个</button>
-				<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
+			{
+				galleryURL.length == 0 &&
+				<div className={className} id='option'>
+					<span className='saveBtn'>{prompt}</span>
+					<button className={`saveBtn${galleryURL.length == 0 ? "-hide" : ""}`} onClick={reEdit}>继续编辑</button>
+					<button className='saveBtn' id='imaaa' onClick={generateImagePreview}>生成预览</button>
+					<button className='saveBtn' onClick={addCard}>增加一个</button>
+					<button className='saveBtn' onClick={deleteLast}>删除最后一个</button>
 
-				<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='saveBtn' />
-			</div>
+					<NumberDropdown initialCount={rows} onSelect={onCountSelected} name='saveBtn' />
+				</div>
+			}
 			<div className={`columnView${galleryURL.length == 0 ? "-active" : ""}`} id='columnView' ref={ref}>
 				<div className='gridList' id='gridList' ref={gridList} style={pageStyle}>
 					{/* <div className='titles'>		<span >音乐生涯个人喜好表</span>		</div> */}

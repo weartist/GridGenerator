@@ -63,6 +63,7 @@
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   color: white;
 
