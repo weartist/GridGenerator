@@ -50,11 +50,10 @@
     /* margin: 20px; */
 }
 
+
 .margin-items {
-  margin: 15px;
+    margin: 15px;
 }
-
-
 
 .subView {
   height: 90px;
@@ -64,18 +63,3 @@
   /* margin-right: -4px; */
 }
 
-.submitURL {
-  display: flex;
-  border-radius: 10px;
-  /* overflow: hidden; */
-}
-
-.submit-title {
-  height: 100%;
-  flex: 2;
-  background-color: #f8f8f8;
-  border-radius: 9px;
-  border-color: black;
-  border-width: 5px;
-  margin-right: 25px;
-}

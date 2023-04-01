@@ -16,6 +16,13 @@ const Menu: React.FC<{ isOpen: boolean, closeHandle: (handle: string) => void, u
         let upimg = document.getElementById("upimg")!
         upimg.click();
     }
+
+    function handleImageUrl() {
+      const urls = document.querySelector('input[type=url]') as HTMLInputElement;
+      const url = urls.value;
+      console.log('url is ' + url);
+      updateHandle(url)
+    }
   
     function previewFile() {
       let preview = document.getElementById("cover") as HTMLImageElement;
@@ -49,9 +56,9 @@ const Menu: React.FC<{ isOpen: boolean, closeHandle: (handle: string) => void, u
             上传图片
           </button> */}
 
-            {/* <div className="submitURL subView">
-                <Input className="submit-title" id="imageURLInput" placeholder="粘贴图片地址" onBlur={finishInput} onInput={handleOnInput}/>
-                <Button className="submit-button" onClick={handleImageUrl}>提交</Button>
+            {/* <div className="submit subView">
+                <input className="submit-title" type='url' id="imageURLInput" placeholder="粘贴图片地址"></input>
+                <button className="submitURL" onClick={handleImageUrl}>提交图片地址</button>
             </div> */}
 
             <button className="margin-items subView" onClick={selectImg}>选择相册图片</button>

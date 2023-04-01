@@ -60,21 +60,34 @@
   width: 98%;
   align-self: center;
   box-sizing: border-box;
-  /* margin-right: -4px; */
+}
+
+.submit {
+  background-color: rgb(235, 235, 235);
+  border-color: rgb(133, 133, 133);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .submitURL {
-  display: flex;
-  border-radius: 10px;
-  /* overflow: hidden; */
+  /* flex: 0; */
+  background-color: #f8f8f8;
+  align-self: center;
+  width: 20%;
+  height: 80%;
 }
 
 .submit-title {
-  height: 100%;
+  height: 50%;
+  width: 70%;
+  align-self: center;
   flex: 2;
   background-color: #f8f8f8;
-  border-radius: 9px;
+  /* border-radius: 9px; */
   border-color: black;
-  border-width: 5px;
+  border-width: 1px;
   margin-right: 25px;
 }
