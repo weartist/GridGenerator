@@ -56,10 +56,10 @@ const Menu: React.FC<{ isOpen: boolean, closeHandle: (handle: string) => void, u
             上传图片
           </button> */}
 
-            {/* <div className="submit subView">
+            <div className="submit subView">
                 <input className="submit-title" type='url' id="imageURLInput" placeholder="粘贴图片地址"></input>
                 <button className="submitURL" onClick={handleImageUrl}>提交图片地址</button>
-            </div> */}
+            </div>
 
             <button className="margin-items subView" onClick={selectImg}>选择相册图片</button>
             

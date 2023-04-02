@@ -51,15 +51,4 @@
 }
 
 
-.margin-items {
-    margin: 15px;
-}
-
-.subView {
-  height: 90px;
-  width: 98%;
-  align-self: center;
-  box-sizing: border-box;
-  /* margin-right: -4px; */
-}
 
