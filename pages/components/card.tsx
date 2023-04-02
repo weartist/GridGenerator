@@ -41,7 +41,7 @@ const Card: React.FC<{ title: string, imgURL: string, row: number, cardHeight: n
   return (
       <div className='card column' style={imgStyle}>
         {imgURL.length > 0 &&
-          <img className='cardCover' src={imgURL} alt="An example image" width={cardWidth} height={cardHeight} onClick={selectImg}></img>
+          <img crossOrigin='Anonymous' className='cardCover' src={imgURL} alt="An example image" width={cardWidth} height={cardHeight} onClick={selectImg}></img>
           // <Image priority className='cardCover' src={imgURL} alt="what ever" width={cardWidth} height={cardHeight} onClick={selectImg} />
         }
         {/* <input id='upimg' aria-label='input' type='file' className='inputs' accept='image/png' onChange={upChange} /> */}
