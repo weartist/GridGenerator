@@ -63,7 +63,7 @@ function useLastSeen() {
 
 export default function Info(props: InfoProps): JSX.Element {
 
-	const defaultImgUrl = '/cover1.png';
+	const defaultImgUrl = '';
 	const lastSeen = useLastSeen();
 	const ref = useRef<HTMLDivElement>(null)
 

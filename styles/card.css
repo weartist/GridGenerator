@@ -1,85 +1,61 @@
 .grid-card {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 250px;
-    height: 400px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  height: 400px;
 
-    border: 3px solid black;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 10px;
-  }
+  border: 3px solid black;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px;
+}
 
-  .grid-card-title {
-  /*   height: 1em; */
-    /* margin: 5px; */
-    color: black;
-    flex-shrink: 0;
-  /*   background-color: white; */
-  /*   align-self: end; */
-    align-self: center;
-    /* font-size: 22; */
-    display: flex;
-    justify-content: center;
-  }
+.grid-card-title {
+  color: black;
+  flex-shrink: 0;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
 
+.cardCover {
+  align-self: stretch;
+  border: none;
+  background: transparent;
+  vertical-align: middle;
+  border-radius: 10px 10px 0px 0px;
+  object-fit: cover;
+}
 
-  .cardCover {
-  /*   flex-shrink: ; */
-    align-self: stretch;
-    /* flex: 2; */
-    border: none;
-    /* width: 100%; */
-    /* width: 100%; */
-    /* height: 100%; */
-    background:transparent;
-    vertical-align:middle;
-    border-radius: 10px 10px 0px 0px;
-    object-fit: cover;
-    /* flex: 1 1 auto; */
+.cardCover:after {
+  border: none;
+}
 
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+}
 
-  .cardCover:after{ border: none; }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-  /*   justify-content: space-between; */
-  }
-
-  .line {
-    width: 100%;
-    height: 1px;
-    /* border: 0.5px solid black; */
-    background-color: black;
-    /* align-items: center; */
-  }
-
-
-
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  flex: 0;
+}
 
 .inputs {
   display: none;
 }
 
-/* .blocks {
-  background-color: red;
-} */
-
-
 .card {
-  /* padding: 1rem 1.2rem; */
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   border-color: black;
-  /* transition: background 200ms, border 200ms; */
   background-color: white;
   margin: 6px;
-
 }
 
 .card span {
@@ -101,6 +77,7 @@
 }
 
 .card-title {
+  flex: 0;
   align-self: center;
   background-color: transparent;
   /* width: 95%; */
@@ -108,8 +85,5 @@
   border: 1px solid rgba(var(--card-border-rgb), 0);
   text-align: center;
   font-size: 1em;
-  /* line-height: 25px; */
   height: 25px;
-  /* margin-bottom: 100px; */
 }
-

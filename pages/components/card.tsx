@@ -5,8 +5,6 @@ import EditableText from './Title';
 
 const Card: React.FC<{ title: string, imgURL: string, row: number, cardHeight: number, cardWidth: number, clickHandle: (args0: number) => void }> = ({ title, imgURL, row, cardHeight, cardWidth, clickHandle }) => {
 
-  const [imgData, setImgData] = useState('/cover1.png');
-
   const selectImg = () => {
     clickHandle(row);
   }
@@ -21,10 +19,6 @@ const Card: React.FC<{ title: string, imgURL: string, row: number, cardHeight: n
     const files = document.querySelector('input[type=file]') as HTMLInputElement;
     const file = files.files![0];
     const reader = new FileReader();
-
-    reader.onloadend = function () {
-      setImgData(reader.result!.toString());
-    }
 
     if (file) {
       reader.readAsDataURL(file);
